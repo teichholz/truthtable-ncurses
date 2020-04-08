@@ -1,0 +1,20 @@
+(executable
+ (name logik)
+ (libraries base stdio)
+)
+
+; (rule
+;  (targets short_parser.mli short_parser.ml)
+;  (deps short_parser.mly)
+;  (action (ignore-stderr (run menhir --explain ${<}))))
+;
+(ocamllex lexer)
+
+(menhir
+ (modules parser)
+ (flags --explain --dump --external-tokens Tok)
+ (infer true))
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))
