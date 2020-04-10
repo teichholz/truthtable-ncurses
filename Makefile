@@ -5,6 +5,6 @@
 # @version 0.1
 
 default:
-	dune build logik.exe
+	dune build gui.exe
 
 # end

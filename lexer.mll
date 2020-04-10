@@ -21,7 +21,7 @@ let newline = '\r' | '\n' | "\r\n"
 rule read =
   parse
   | white { read lexbuf }
-  | newline { next_line lexbuf; read lexbuf }
+  | newline { EOF }
   | "true" { TERMINAL true }
   | "false" { TERMINAL false }
   | '&' { AND }
@@ -30,5 +30,4 @@ rule read =
   | '(' { LPAR }
   | ')' { RPAR }
   | var { VAR (Char.of_string (Lexing.lexeme lexbuf)) }
-  | eof { EOF }
   | _ { raise (SyntaxError ("Unerwartetes Zeichen:" ^ Lexing.lexeme lexbuf)) }
